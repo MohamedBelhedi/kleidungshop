@@ -11,13 +11,13 @@ class Directory extends React.Component{
                   title: 'Caps',
                   imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
                   id: 1,
-                  linkUrl: 'shop/hats'
+                  linkUrl: 'shop/caps'
                 },
                 {
                   title: 'Jacken',
                   imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
                   id: 2,
-                 linkUrl: 'shop/jackets'
+                 linkUrl: 'shop/jacken'
                 },
                 {
                   title: 'sneakers',
@@ -30,14 +30,14 @@ class Directory extends React.Component{
                   imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
                   size: 'large',
                   id: 4,
-                  linkUrl: 'shop/womens'
+                  linkUrl: 'shop/Frauen'
                 },
                 {
                   title: 'Männer',
                   imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
                   id: 5,
                   size:'large',
-                  linkUrl: 'shop/mens'
+                  linkUrl: 'shop/männer'
                 }]
 
               
@@ -47,8 +47,9 @@ class Directory extends React.Component{
         return(
             <div className="directory-menu">
                 {
-                    this.state.sections.map(({title,imageUrl,id,size})=>(
-                        <MenuPunkt key={id} title={title} imageUrl={imageUrl} size={size}/>
+                    this.state.sections.map(({id,...otherSectionProps})=>(
+                      // alles wird mit Es6 gekürzt, anstatt Title,size.. alles auszuschreiben durch otherSectionProps zieht er sie Automatisch raus
+                        <MenuPunkt key={id} {...otherSectionProps}/>
                     ))
                 }
                 </div>

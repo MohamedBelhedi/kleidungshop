@@ -1,8 +1,9 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom';
 import './menü-punkt.styley.scss'
 
-const MenuPunkt=({title,imageUrl,size})=>(
-    <div className={`${size} menu-punkt`}>
+const MenuPunkt=({title,imageUrl,size,history,linkUrl,match})=>(
+    <div className={`${size} menu-punkt`} onClick={()=>history.push(`${match.url}${linkUrl}`)}>
         <div className="background-image" style={{
         backgroundImage:`url(${imageUrl})`
     }} />
@@ -12,5 +13,6 @@ const MenuPunkt=({title,imageUrl,size})=>(
     </div>
     </div>
 );
+// gibt eine Super Power Menüpunkt Component damit den leichten Eingang hat
 
-export default MenuPunkt;
+export default withRouter(MenuPunkt);
