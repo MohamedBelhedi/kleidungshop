@@ -4,7 +4,8 @@ import './menü-punkt.styley.scss'
 
 const MenuPunkt=({title,imageUrl,size,history,linkUrl,match})=>(
     <div className={`${size} menu-punkt`} onClick={()=>history.push(`${match.url}${linkUrl}`)}>
-        <div className="background-image" style={{
+        <div className="background-image" 
+        style={{
         backgroundImage:`url(${imageUrl})`
     }} />
     <div className="content">
