@@ -12,7 +12,7 @@ import SignInAndSignUpPage from './pages/sign-in-sign-up/sign-in-sign-up.compone
 function App() {
   return (
     <div>
-{/* <Header> */}
+<Header/>
 
 
     <Switch>
