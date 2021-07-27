@@ -49,16 +49,17 @@ render(){
                 label="Passwort" 
                 required 
                 handleChange={this.handleChange}/>
-                
+
+                <div className="buttons">       
 
                 <CustomButton type="submit">Anmelden</CustomButton>
-                <CustomButton onClick={signInWithGoogle}>
+                <CustomButton onClick={signInWithGoogle} isGoogleSignIn >
                     {''}
                     Anmelden mit Google
                     {''}
                     </CustomButton>
                 
-                
+                    </div>
             </form>
         </div>
     )

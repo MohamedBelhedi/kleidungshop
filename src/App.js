@@ -6,30 +6,57 @@ import Homepage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component.jsx';
 import Header from './component/header/header.component.jsx'
 import SignInAndSignUpPage from './pages/sign-in-sign-up/sign-in-sign-up.component';
+import {auth} from './firebase/firebase.utils'
+import React from 'react';
+
 // import '../pages/homepage/homepage.styles.scss';
 
 
-function App() {
-  return (
-    <div>
-<Header/>
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      // jetzigebenutzer
+      currentUser:null
 
+    }
+  }
+  unsubscribeFromAuth=null
+  componentDidMount(){
+    this.unsubscribeFromAuth=auth.onAuthStateChanged(user=>{
+      this.setState({currentUser:user});
+      console.log(user)
+    })
 
-    <Switch>
-    
-    
-      <Route exact path="/" component={Homepage}/>
-      <Route exact path="/shop" component={ShopPage}/>
-      <Route exact path="/einloggen" component={SignInAndSignUpPage}/>
+  }
+
+  componentWillUnmount(){
+    this.unsubscribeFromAuth();
+  }
+  render(){
+    return (
+      <div>
+  <Header currentUser={this.state.currentUser}/>
+  
+  
+      <Switch>
       
-    </Switch>
-   
-    {/* </Header> */}
-   
-    
-    </div>
+      
+        <Route exact path="/" component={Homepage}/>
+        <Route exact path="/shop" component={ShopPage}/>
+        <Route exact path="/einloggen" component={SignInAndSignUpPage}/>
+        
+      </Switch>
+     
+      {/* </Header> */}
+     
+      
+      </div>
+  
+    );
+  }
+  
 
-  );
-}
-
+  }
+  
 export default App;
