@@ -6,7 +6,7 @@ import Homepage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component.jsx';
 import Header from './component/header/header.component.jsx'
 import SignInAndSignUpPage from './pages/sign-in-sign-up/sign-in-sign-up.component';
-import {auth} from './firebase/firebase.utils'
+import {auth,benutzerProfil} from './firebase/firebase.utils'
 import React from 'react';
 
 // import '../pages/homepage/homepage.styles.scss';
@@ -22,10 +22,28 @@ class App extends React.Component {
     }
   }
   unsubscribeFromAuth=null
+
   componentDidMount(){
-    this.unsubscribeFromAuth=auth.onAuthStateChanged(user=>{
-      this.setState({currentUser:user});
-      console.log(user)
+    this.unsubscribeFromAuth=auth.onAuthStateChanged( async userAuth=>{
+      // this.setState({currentUser:user});
+      if(userAuth){
+        const userRef= await benutzerProfil(userAuth);
+        userRef.onSnapshot(snapshot=>{
+          this.setState({
+            currentUser:{
+              id:snapshot.id,
+              ...snapshot.data()
+            }
+          // },()=>{
+          //   // console.log kann nicht danach kommen immer in der Funktion
+          //   console.log(this.state);
+          });
+          console.log(this.state)
+        });
+        
+      }
+      this.setState({currentUser:userAuth});
+      // console.log(user)
     })
 
   }

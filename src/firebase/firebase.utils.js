@@ -14,7 +14,37 @@ const config={
     measurementId: "G-74V1G0XT35"
   };
 
+  export const benutzerProfil=async (userAuth,datenHinzufügen) =>{
+    if (!userAuth)
+      return; 
 
+      const userRef=firestore.doc(`users/${userAuth.uid}`);
+      const snapshot=await userRef.get();
+
+      if(!snapshot.exists){
+        const{displayname,email}=userAuth;
+        const creatAt=new Date();
+        try{
+          await userRef.set({
+            displayname,
+            email,
+            creatAt,
+            ...datenHinzufügen
+
+
+          })
+
+        }catch(error){
+          console.log('Error Konnte nichts gefunden werden, bitte versuche es nochmal',error.message)
+
+        }
+      }
+
+     return userRef;
+
+
+
+  }
   firebase.initializeApp(config);
   export const auth=firebase.auth();
   export const firestore=firebase.firestore();
