@@ -37,7 +37,8 @@ class SignUp extends React.Component{
 
         }catch(error){
 
-            console.error(error)
+            // console.error(error)
+            alert("Passwort Stimmt nicht überein",error)
         }
     };
 
@@ -90,7 +91,7 @@ class SignUp extends React.Component{
                     required
                     />
                   
-                   <CustomButton type="submit">Registrieren</CustomButton>
+                   <CustomButton>Registrieren</CustomButton>
 
                 </form>
             </div>
