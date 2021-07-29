@@ -7,42 +7,45 @@ import ShopPage from './pages/shop/shop.component.jsx';
 import Header from './component/header/header.component.jsx'
 import SignInAndSignUpPage from './pages/sign-in-sign-up/sign-in-sign-up.component';
 import {auth,benutzerProfil} from './firebase/firebase.utils'
+import{setCurrentUser} from './redux/user/user.actions';
+import {connect} from 'react-redux';
 import React from 'react';
 
 // import '../pages/homepage/homepage.styles.scss';
 
 
 class App extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={
-      // jetzigebenutzer
-      currentUser:null
+  // constructor(props){
+  //   super(props);
+  //   this.state={
+  //     // jetzigebenutzer
+  //     currentUser:null
 
-    }
-  }
+  //   }
+  // }
   unsubscribeFromAuth=null
-
+// hier wurde der Benutzer Gespeichert mit der Funktion
   componentDidMount(){
+    const {setCurrentUser}=this.props
     this.unsubscribeFromAuth=auth.onAuthStateChanged( async userAuth=>{
       // this.setState({currentUser:user});
       if(userAuth){
         const userRef= await benutzerProfil(userAuth);
         userRef.onSnapshot(snapshot=>{
-          this.setState({
-            currentUser:{
+          // this.setState({
+          //   currentUser:
+          setCurrentUser({
               id:snapshot.id,
               ...snapshot.data()
-            }
+            })
           // },()=>{
           //   // console.log kann nicht danach kommen immer in der Funktion
           //   console.log(this.state);
-          });
           console.log(this.state)
         });
         
       }
-      this.setState({currentUser:userAuth});
+      setCurrentUser({userAuth});
       // console.log(user)
     })
 
@@ -78,4 +81,8 @@ class App extends React.Component {
 
   }
   
-export default App;
+const mapDispachToProps=dispatch=>({
+setCurrentUser:user=>dispatch(setCurrentUser(user))
+})
+  
+export default connect(null,mapDispachToProps)(App);
