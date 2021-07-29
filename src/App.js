@@ -54,7 +54,8 @@ class App extends React.Component {
   render(){
     return (
       <div>
-  <Header currentUser={this.state.currentUser}/>
+  <Header/>
+   {/* kommt beim header  currentUser={this.state.currentUser} */}
   
   
       <Switch>
