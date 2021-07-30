@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom';
+import CustomButton from '../custom-button/custom-button.component';
 import './collection-item.styles.scss'
 const CollectionItem=({id,name,price,imageUrl})=>(
     <div className="collection-item">
@@ -17,6 +18,7 @@ const CollectionItem=({id,name,price,imageUrl})=>(
             
 
         </div>
+        <CustomButton>Im Warenkorb Hinzufügen</CustomButton>
 
 
     </div>

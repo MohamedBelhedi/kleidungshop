@@ -66,10 +66,11 @@ class App extends React.Component {
       
         <Route exact path="/" component={Homepage}/>
         <Route path="/shop" component={ShopPage}/>
-        <Route exact
+        <Route 
+          exact
           path="/einloggen" 
          render={()=>this.props.currentUser ? 
-         (<Redirect to='/'/>
+         (<Redirect to='/' />
          
          )
          :(

@@ -17,7 +17,7 @@ const CartIcon=({toggleCartHidden})=>(
 );
 
 const mapDispachToProps=dispatch=>({
-    toggleCartHidden:()=>(toggleCartHidden())
+    toggleCartHidden:()=>dispatch(toggleCartHidden())
 })
 
 

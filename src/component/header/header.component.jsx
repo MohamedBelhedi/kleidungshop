@@ -9,7 +9,8 @@ import {auth} from '../../firebase/firebase.utils';
 
 
 import'./header.styles.scss'
- const Header=({currentUser,hidden})=>(
+ 
+const Header=({currentUser,hidden})=>(
      <div className="header">
          <Link className="logo-container" to="/"/>
 
