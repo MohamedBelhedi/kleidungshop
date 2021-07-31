@@ -1,8 +1,13 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux'
+import{addItem} from '../../redux/cart/cart.actions'
 import CustomButton from '../custom-button/custom-button.component';
 import './collection-item.styles.scss'
-const CollectionItem=({id,name,price,imageUrl})=>(
+const CollectionItem=({item,addItem})=>{
+    const {name,price,imageUrl}=item
+    return(
+
     <div className="collection-item">
         <div
         className="image"
@@ -18,12 +23,16 @@ const CollectionItem=({id,name,price,imageUrl})=>(
             
 
         </div>
-        <CustomButton>Im Warenkorb Hinzufügen</CustomButton>
+        <CustomButton onClick={()=>addItem(item)}>Im Warenkorb</CustomButton>
 
 
     </div>
-)
+)};
+const mapDispachToProps=dispatch=>({
+    addItem:item=>dispatch(addItem(item))
+})
 
 
 
-export default withRouter(CollectionItem);
+export default connect(null,mapDispachToProps)(CollectionItem);
+// export default withRouter(CollectionItem);
