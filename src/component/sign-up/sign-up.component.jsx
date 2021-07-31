@@ -17,7 +17,7 @@ class SignUp extends React.Component{
     handleSubmit=async event=>{
         event.preventDefault();
         const{displayname,email,passwort,passwortBestätigung}=this.state
-        if(passwort!=passwortBestätigung){
+        if(passwort===passwortBestätigung){
             alert('Passwort stimmt nicht Überein')
             return;
         }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom';
+
 import {connect} from 'react-redux'
 import{addItem} from '../../redux/cart/cart.actions'
 import CustomButton from '../custom-button/custom-button.component';
