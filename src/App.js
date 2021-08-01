@@ -10,6 +10,10 @@ import {auth,benutzerProfil} from './firebase/firebase.utils'
 import{setCurrentUser} from './redux/user/user.actions';
 import {connect} from 'react-redux';
 import React from 'react';
+import {selectCurrentUser} from './redux/user/user.selectors'
+import { createStructuredSelector } from 'reselect';
+import CheckOut from './pages/checkout/checkout.component';
+
 
 // import '../pages/homepage/homepage.styles.scss';
 
@@ -38,10 +42,7 @@ class App extends React.Component {
               id:snapshot.id,
               ...snapshot.data()
             })
-          // },()=>{
-          //   // console.log kann nicht danach kommen immer in der Funktion
-          //   console.log(this.state);
-          console.log(this.state)
+         
         });
         
       }
@@ -66,6 +67,7 @@ class App extends React.Component {
       
         <Route exact path="/" component={Homepage}/>
         <Route path="/shop" component={ShopPage}/>
+        <Route path="/bezahlen" component={CheckOut}/>
         <Route 
           exact
           path="/einloggen" 
@@ -93,12 +95,14 @@ class App extends React.Component {
 
   }
 
-const mapStateToProps=({user})=>({
-  currentUser:user.currentUser
+const mapStateToProps=createStructuredSelector({
+  currentUser:selectCurrentUser
 });
   
 const mapDispachToProps=dispatch=>({
 setCurrentUser:user=>dispatch(setCurrentUser(user))
 })
   
-export default connect(mapStateToProps,mapDispachToProps)(App);
+export default connect(mapStateToProps,
+  mapDispachToProps)
+  (App);
