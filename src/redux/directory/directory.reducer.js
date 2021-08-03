@@ -10,7 +10,7 @@ const INITIAL_STATE={
           title: 'Jacken',
           imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
           id: 2,
-         linkUrl: 'shop/jacken'
+         linkUrl: 'shop/Jacken'
         },
         {
           title: 'sneakers',
@@ -30,7 +30,7 @@ const INITIAL_STATE={
           imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
           id: 5,
           size:'large',
-          linkUrl: 'shop/männer'
+          linkUrl: 'shop/Männer'
         }]
 };
 
