@@ -8,18 +8,33 @@ import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 import { selectCarthidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import {auth} from '../../firebase/firebase.utils';
+// import {auth} from '../../firebase/firebase.utils';
+import firebase from "firebase/app";
+// import {user} from '../../firebase/firebase.utils';
 
 
 import'./header.styles.scss'
- 
+// evtl den SignOut Code löschen
+
+const signOut = async (e) => {
+    e.preventDefault();
+
+    await firebase.auth().signOut().then(function() {
+      console.log("Successfully signed out.")
+
+    }).catch(function(error) {
+      console.log(error)
+      console.log("An error occurred")
+    });}
 const Header=({currentUser,hidden})=>(
      <div className="header">
          <Link className="logo-container" to="/"/>
 
              <Logo className="logo"></Logo>
 
+        
 
+    
 
 
         
@@ -32,7 +47,8 @@ const Header=({currentUser,hidden})=>(
              </Link>
              {
                  currentUser ?(
-                 <div className="option" onClick={()=>auth.signOut()}>Ausloggen</div>
+                 <div className="option" onClick={signOut}>Ausloggen</div>
+                //  ()=>auth.signOut in die onClick Methode einfügen
                  ):(
                  <Link className="option" to='/einloggen'>Anmelden</Link>
                  )}
@@ -41,9 +57,7 @@ const Header=({currentUser,hidden})=>(
 
          </div>
          {
-         hidden ? null:
-         
-         <CartDropDown/>
+         hidden ? null:<CartDropDown/>
          }
 
 
@@ -51,7 +65,7 @@ const Header=({currentUser,hidden})=>(
     
  );
 
- const mapStateToProps=(state)=>createStructuredSelector({
+ const mapStateToProps=createStructuredSelector({
      currentUser:selectCurrentUser,
      hidden:selectCarthidden
 
