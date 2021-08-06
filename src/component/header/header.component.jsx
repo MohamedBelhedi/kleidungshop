@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import{connect}  from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { ReactComponent as Logo } from '../../assets/crown.svg'
@@ -8,7 +8,7 @@ import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 import { selectCarthidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import{HeaderContainer,OptionContainerStyles,LogoContainer,OptionsContainer,OptionLink,OptionDiv} from './header.styles.jsx'
+import{HeaderContainer,LogoContainer,OptionsContainer,OptionLink} from './header.styles.jsx'
 
 // import {auth} from '../../firebase/firebase.utils';
 import firebase from "firebase/app";
@@ -21,12 +21,12 @@ import'./header.styles.scss'
 const signOut = async (e) => {
     e.preventDefault();
 
-    await firebase.auth().signOut().then(function() {
-      console.log("Successfully signed out.")
+     firebase.auth().signOut().then(function() {
+      console.log("Erfolgreich Abgemeldet.")
 
     }).catch(function(error) {
       console.log(error)
-      console.log("An error occurred")
+      console.log("Ein Fehler wurde gefunden".error)
     });}
 const Header=({currentUser,hidden})=>(
      
