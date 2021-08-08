@@ -45,7 +45,37 @@ const config={
 
 
   }
-  
+  // Dieser Code hat die Items in einer Collection in der Firebas Store gespeichert und wurde in der App js aufgerufen/gesendet
+  export const addCollectionAndDocuments= async(colletionKey,objectsToAdd)=>{
+    const collectionRef=firestore.collection(colletionKey);
+    console.log(collectionRef);
+    const batch=firestore.batch();
+    objectsToAdd.forEach(obj=>{
+      const  newDocRef=collectionRef.doc();
+    batch.set(newDocRef,obj)
+    });
+
+    return await batch.commit()
+
+
+  };
+
+  export const convertCollectionSnapshotToMap=(collections)=>{
+    const transformedCollection=collections.docs.map(
+      doc=>{
+        const {title,items}=doc.data();
+        return {
+          routeName:encodeURI(title.toLowerCase()),
+          id:doc.id,
+          title,items
+        }
+      }
+    );
+    return transformedCollection.reduce((accumulator,collection)=>{
+      accumulator[collection.title.toLowerCase()]=collection;
+      return accumulator;
+    },{})
+  }
   export const auth=firebase.auth();
   export const firestore=firebase.firestore();
 
